@@ -1,88 +1,67 @@
 package com.example.newsn
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.produceState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import com.example.newsn.data.remote.api.NewsService
-import com.example.newsn.data.remote.dto.News
+import androidx.navigation.compose.rememberNavController
+import com.example.newsn.ui.AppNavigation
+import com.example.newsn.ui.HomeScreen.HomeViewModel
 import com.example.newsn.ui.theme.NewsNTheme
-import com.google.accompanist.coil.CoilImage
 
 class MainActivity : ComponentActivity() {
 
-    private val service = NewsService.create()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val news = produceState<List<News>>(
-                initialValue = emptyList(),
-                producer = {
-                    value = service.getTopHeadlines()
-                }
-            )
-            NewsNTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting(news)
-                }
-            }
-        }
-    }
-}
-
-@ExperimentalCoilApi
-@Composable
-fun Greeting(posts: State<List<News>>) {
-    LazyColumn {
-        items(posts.value) {
-            Surface(
-                color = MaterialTheme.colors.background,
-                modifier = Modifier.padding(vertical = 16.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { },
+            val news = viewModel.news
+            NewsNTheme(darkTheme = false) {
+                val connectivityManager =
+                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val activeNetworkInfo = connectivityManager.activeNetworkInfo
+                if (
+                    activeNetworkInfo != null && activeNetworkInfo.isConnected
                 ) {
-                    Image(
-                        painter = rememberImagePainter(
-                            data = it.urlToImage,
-                            builder = {
-
-                            }
-                        ),
-                        contentDescription = "This is image associated with news",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(220.dp)
-                    )
-                    Text(
-                        text = it.title.toString(),
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
+                    // A surface container using the 'background' color from the theme
+                    Surface(color = MaterialTheme.colors.background) {
+                        val navController = rememberNavController()
+                        AppNavigation(viewModel,navController)
+                    }
+                }else{
+                    NetworkError()
                 }
+
             }
         }
     }
 }
+
+@Composable
+fun NetworkError() {
+    Column(modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Center) {
+        Image(imageVector = Icons.Filled.Error, contentDescription = "Error image",modifier = Modifier.size(100.dp))
+        Text(text = "No internet connection",
+            textAlign = TextAlign.Center,
+            fontSize = 25.sp)
+    }
+}
+
+
 
 //@Preview(showBackground = true)
 //@Composable

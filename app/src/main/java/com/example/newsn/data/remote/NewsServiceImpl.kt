@@ -36,6 +36,9 @@ class NewsServiceImpl(
             println("Error: ${e.message}")
             null
         }
-        return newsResponse?.articles!!
+        if (newsResponse==null){
+            return listOf()
+        }
+        return newsResponse.articles
     }
 }

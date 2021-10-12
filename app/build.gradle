@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\gulsh\\3D Objects\\upload_keystore.jks')
+            storePassword 'Kuchbhi@123'
+            keyAlias 'gulshanpatidar'
+            keyPassword 'Kuchbhi@123'
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -26,12 +34,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "env"
+    productFlavors {
+        local {
+            dimension "env"
+        }
+        production {
+            dimension "env"
+        }
+    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
         useIR = true
     }
     buildFeatures {
@@ -83,4 +100,7 @@ dependencies {
     //material icons
     implementation "androidx.compose.material:material-icons-core:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
+    //navigation
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha10"
 }
