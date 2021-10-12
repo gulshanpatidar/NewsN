@@ -38,27 +38,29 @@ fun HomeScreen(news: State<List<News>>, navController: NavHostController) {
                         .fillMaxWidth()
                         .clickable { },
                 ) {
-                    val painter = rememberImagePainter(data = it.urlToImage)
-                    val state = painter.state
-                    if (state is ImagePainter.State.Loading) {
-                        //image is loading
-                        LoadingNewsListShimmer(imageHeight = 220.dp)
-                    } else if (state is ImagePainter.State.Error) {
-                        Text(text = "An error occurred")
-                    } else {
-                        Image(
-                            painter = painter,
-                            contentDescription = "This is image associated with news",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(220.dp)
+                    it.urlToImage?.let { url ->
+                        val painter = rememberImagePainter(data = url)
+                        val state = painter.state
+                        if (state is ImagePainter.State.Loading) {
+                            //image is loading
+                            LoadingNewsListShimmer(imageHeight = 220.dp)
+                        } else if (state is ImagePainter.State.Error) {
+                            Text(text = "An error occurred")
+                        } else {
+                            Image(
+                                painter = painter,
+                                contentDescription = "This is image associated with news",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(220.dp)
+                            )
+                        }
+                        Text(
+                            text = it.title.toString(),
+                            fontSize = 16.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp)
                         )
                     }
-                    Text(
-                        text = it.title.toString(),
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
                 }
             }
         }
