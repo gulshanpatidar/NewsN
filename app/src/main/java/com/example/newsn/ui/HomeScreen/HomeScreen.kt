@@ -1,7 +1,5 @@
 package com.example.newsn.ui.HomeScreen
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -10,18 +8,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.outlined.Image
-import androidx.compose.material.icons.twotone.Image
-import androidx.compose.material.icons.twotone.Warning
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -35,13 +30,16 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.newsn.data.remote.dto.News
 import com.example.newsn.ui.HomeScreen.components.LoadingNewsListShimmer
+import com.example.newsn.ui.components.ScaffoldUse
 
 @ExperimentalCoilApi
 @Composable
 fun HomeScreen(news: State<List<News>>, navController: NavHostController) {
-    LazyColumn {
-        items(news.value) {
-            NewsCard(news = it)
+    ScaffoldUse {
+        LazyColumn {
+            items(news.value) {
+                NewsCard(news = it)
+            }
         }
     }
 }
@@ -110,8 +108,8 @@ fun NewsCard(news: News) {
                             color = Color(0xff7a7973),
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        ReadMoreButton(url = news.url)
                     }
+                    ReadMoreButton(url = news.url)
                 }
             }
         }
@@ -121,25 +119,21 @@ fun NewsCard(news: News) {
 @Composable
 fun ReadMoreButton(url: String?) {
 
-//    val context = LocalContext.current
-//    val intent = remember {
-//        Intent(Intent.ACTION_VIEW,Uri.parse(url))
-//    }
     val uriHandler = LocalUriHandler.current
 
-    ClickableText(text = buildAnnotatedString {
-        withStyle(style = ParagraphStyle(lineHeight = 12.sp)){
-            withStyle(style = SpanStyle(color = Color.Blue)){
-                append("Read more")
+    ClickableText(
+        text = buildAnnotatedString {
+            withStyle(style = ParagraphStyle(lineHeight = 12.sp)) {
+                withStyle(style = SpanStyle(color = Color.Blue)) {
+                    append("Read more")
+                }
             }
-        }
-    },
-//        onClick = { context.startActivity(intent) },
+        },
         onClick = {
-                  url?.let {
-                      uriHandler.openUri(it)
-                  }
-                  },
+            url?.let {
+                uriHandler.openUri(it)
+            }
+        },
         modifier = Modifier.padding(horizontal = 8.dp)
     )
 }
