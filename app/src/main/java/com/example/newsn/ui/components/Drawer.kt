@@ -41,6 +41,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "general"
                     viewModel.getNews(category = "general")
                     closeDrawer()
                 }
@@ -53,6 +54,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "sports"
                     viewModel.getNews(category = "sports")
                     closeDrawer()
                 }
@@ -65,6 +67,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "entertainment"
                     viewModel.getNews(category = "entertainment")
                     closeDrawer()
                 }
@@ -77,6 +80,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "technology"
                     viewModel.getNews(category = "technology")
                     closeDrawer()
                 }
@@ -89,6 +93,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "business"
                     viewModel.getNews(category = "business")
                     closeDrawer()
                 }
@@ -101,6 +106,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "health"
                     viewModel.getNews(category = "health")
                     closeDrawer()
                 }
@@ -113,6 +119,7 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
+                    viewModel.category.value = "science"
                     viewModel.getNews(category = "science")
                     closeDrawer()
                 }

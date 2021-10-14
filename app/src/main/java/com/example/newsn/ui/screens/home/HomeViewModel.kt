@@ -12,6 +12,9 @@ class HomeViewModel: ViewModel() {
     val news: MutableState<List<News>> = mutableStateOf(listOf())
     val service = NewsService.create()
 
+    val country: MutableState<String> = mutableStateOf("in")
+    val category: MutableState<String> = mutableStateOf("general")
+
     init {
         getNews()
     }

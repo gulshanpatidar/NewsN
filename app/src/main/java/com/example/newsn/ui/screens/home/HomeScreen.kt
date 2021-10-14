@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Card
+import androidx.compose.material.DropdownMenu
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -29,6 +30,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.newsn.data.remote.dto.News
+import com.example.newsn.ui.components.DropDownMenuImpl
 import com.example.newsn.ui.screens.home.components.LoadingNewsListShimmer
 import com.example.newsn.ui.components.ScaffoldUse
 

@@ -9,32 +9,36 @@ import com.example.newsn.ui.screens.home.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ScaffoldUse(navController: NavHostController,viewModel: HomeViewModel) {
-    val scaffoldState = rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
+fun ScaffoldUse(navController: NavHostController, viewModel: HomeViewModel) {
+    val scaffoldState =
+        rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
 
     //use coroutine to open and close drawer
     val coroutineScope = rememberCoroutineScope()
-    
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopBar( onMenuClicked = {
-                coroutineScope.launch {
-                    scaffoldState.drawerState.open()
+            TopBar(
+                viewModel = viewModel,
+                onMenuClicked = {
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.open()
+                    }
                 }
-            } )
+            )
         },
         bottomBar = {
             BottomBar(navController = navController)
         },
         drawerContent = {
-            Drawer(viewModel){
+            Drawer(viewModel) {
                 coroutineScope.launch {
                     scaffoldState.drawerState.close()
                 }
             }
         }
-    ){ innerPadding ->
-        AppNavigation(viewModel = viewModel, navController = navController,innerPadding)
+    ) { innerPadding ->
+        AppNavigation(viewModel = viewModel, navController = navController, innerPadding)
     }
 }
