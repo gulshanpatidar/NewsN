@@ -8,10 +8,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import coil.annotation.ExperimentalCoilApi
+import com.example.newsn.ui.category.CategoryScreen
 import com.example.newsn.ui.home.HomeScreen
 import com.example.newsn.ui.home.HomeViewModel
 import com.example.newsn.ui.home.SplashScreen
 import com.example.newsn.ui.profile.ProfileScreen
+import com.example.newsn.ui.saved.SavedScreen
 import com.example.newsn.ui.search.SearchScreen
 import com.example.newsn.ui.util.Routes
 
@@ -43,6 +45,14 @@ fun AppNavigation(
 
         composable(Routes.Search.route) {
             SearchScreen()
+        }
+
+        composable(Routes.Category.route){
+            CategoryScreen()
+        }
+
+        composable(Routes.Saved.route){
+            SavedScreen()
         }
     }
 }

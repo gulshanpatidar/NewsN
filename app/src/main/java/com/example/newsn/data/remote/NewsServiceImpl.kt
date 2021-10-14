@@ -12,13 +12,16 @@ class NewsServiceImpl(
     private val client: HttpClient
 ) : NewsService {
 
-    override suspend fun getTopHeadlines(): List<News> {
-        val newsResponse =  try {
+    override suspend fun getTopHeadlines(country: String,category: String): List<News> {
+        val newsResponse = try {
             client.get<NewsResponse> {
                 url(HttpRoutes.TOP_HEADLINES)
-                parameter("language","en")
-                parameter("sortBy","publishedAt")
-                parameter("apiKey",HttpRoutes.API_KEY)
+                parameter("language", "en")
+                parameter("country",country)
+                if (category.isNotEmpty()) {
+                    parameter("category", category)
+                }
+                parameter("apiKey", HttpRoutes.API_KEY)
             }
         } catch (e: RedirectResponseException) {
             // 3XX responses
@@ -36,7 +39,7 @@ class NewsServiceImpl(
             println("Error: ${e.message}")
             null
         }
-        if (newsResponse==null){
+        if (newsResponse == null) {
             return listOf()
         }
         return newsResponse.articles

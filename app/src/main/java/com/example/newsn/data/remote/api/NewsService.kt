@@ -10,7 +10,7 @@ import io.ktor.client.features.logging.*
 
 interface NewsService {
 
-    suspend fun getTopHeadlines(): List<News>
+    suspend fun getTopHeadlines(country: String,category: String): List<News>
 
     companion object{
         fun create(): NewsService{

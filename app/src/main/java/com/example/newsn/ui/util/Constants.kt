@@ -18,7 +18,7 @@ object Constants {
             route = Routes.Search.route
         ),
         BottomNavItem(
-            label = "category",
+            label = "genre",
             icon = Icons.Default.Category,
             route = Routes.Category.route
         ),

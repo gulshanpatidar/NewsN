@@ -16,9 +16,9 @@ class HomeViewModel: ViewModel() {
         getNews()
     }
 
-    fun getNews(){
+    fun getNews(country: String = "in",category: String = ""){
         viewModelScope.launch {
-            news.value = service.getTopHeadlines()
+            news.value = service.getTopHeadlines(country,category)
         }
     }
 }
