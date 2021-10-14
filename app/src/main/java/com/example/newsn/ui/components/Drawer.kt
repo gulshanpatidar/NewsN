@@ -1,27 +1,29 @@
 package com.example.newsn.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.newsn.ui.screens.home.HomeViewModel
 
 @Composable
-fun Drawer() {
+fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
 
     Column(
         modifier = Modifier
             .background(Color.White)
             .fillMaxSize()
     ) {
-        Box(modifier = Modifier.background(MaterialTheme.colors.primary).fillMaxWidth()){
+        Box(modifier = Modifier
+            .background(MaterialTheme.colors.primary)
+            .fillMaxWidth()) {
             Spacer(modifier = Modifier.height(50.dp))
             Text(
                 text = "Categories",
@@ -35,50 +37,86 @@ fun Drawer() {
         }
         Divider(Modifier.height(1.dp))
         Text(
-            text = "Top headlines",
-            modifier = Modifier.padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(Modifier.height(1.dp))
-        Text(
-            text = "General",
-            modifier = Modifier.padding(12.dp),
+            text = "Top Headlines",
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "general")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Sports",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "sports")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Entertainment",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "entertainment")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Technology",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "technology")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Business",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "business")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Health",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "health")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(modifier = Modifier.height(1.dp))
         Text(
             text = "Science",
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    viewModel.getNews(category = "science")
+                    closeDrawer()
+                }
+                .padding(12.dp),
             fontSize = 20.sp
         )
         Divider(Modifier.height(1.dp))

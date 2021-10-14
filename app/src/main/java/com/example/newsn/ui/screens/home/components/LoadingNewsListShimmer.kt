@@ -1,4 +1,4 @@
-package com.example.newsn.ui.home.components
+package com.example.newsn.ui.screens.home.components
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.BoxWithConstraints

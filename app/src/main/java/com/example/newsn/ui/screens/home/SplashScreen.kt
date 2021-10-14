@@ -1,4 +1,4 @@
-package com.example.newsn.ui.home
+package com.example.newsn.ui.screens.home
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable

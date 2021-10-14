@@ -1,4 +1,4 @@
-package com.example.newsn.ui.home.components
+package com.example.newsn.ui.screens.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

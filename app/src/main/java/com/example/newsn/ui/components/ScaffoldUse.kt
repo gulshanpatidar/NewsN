@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.example.newsn.ui.AppNavigation
-import com.example.newsn.ui.home.HomeViewModel
+import com.example.newsn.ui.screens.home.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,7 +28,11 @@ fun ScaffoldUse(navController: NavHostController,viewModel: HomeViewModel) {
             BottomBar(navController = navController)
         },
         drawerContent = {
-            Drawer()
+            Drawer(viewModel){
+                coroutineScope.launch {
+                    scaffoldState.drawerState.close()
+                }
+            }
         }
     ){ innerPadding ->
         AppNavigation(viewModel = viewModel, navController = navController,innerPadding)

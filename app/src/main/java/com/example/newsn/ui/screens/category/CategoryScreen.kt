@@ -1,4 +1,4 @@
-package com.example.newsn.ui.profile
+package com.example.newsn.ui.screens.category
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,9 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ProfileScreen() {
-    Box(modifier = Modifier.fillMaxSize()){
-        Text(text = "This is your profile",
-        modifier = Modifier.align(Alignment.Center))
+fun CategoryScreen() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(
+            text = "see your favorite topic",
+            modifier = Modifier.align(Alignment.Center)
+        )
     }
 }

@@ -1,4 +1,4 @@
-package com.example.newsn.ui.saved
+package com.example.newsn.ui.screens.search
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,10 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SavedScreen() {
+fun SearchScreen() {
+
     Box(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = "save your favorite news",
+            text = "Search your favorite topic",
             modifier = Modifier.align(Alignment.Center)
         )
     }

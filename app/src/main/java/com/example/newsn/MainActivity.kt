@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.newsn.ui.AppNavigation
 import com.example.newsn.ui.components.ScaffoldUse
-import com.example.newsn.ui.home.HomeViewModel
+import com.example.newsn.ui.screens.home.HomeViewModel
 import com.example.newsn.ui.theme.NewsNTheme
 
 @ExperimentalCoilApi

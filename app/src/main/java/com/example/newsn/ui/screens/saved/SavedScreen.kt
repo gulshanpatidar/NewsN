@@ -1,4 +1,4 @@
-package com.example.newsn.ui.category
+package com.example.newsn.ui.screens.saved
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,10 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CategoryScreen() {
+fun SavedScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = "see your favorite topic",
+            text = "save your favorite news",
             modifier = Modifier.align(Alignment.Center)
         )
     }
