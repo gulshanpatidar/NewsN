@@ -1,7 +1,6 @@
-package com.example.newsn.ui.HomeScreen
+package com.example.newsn.ui.home
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.example.newsn.ui.HomeScreen
+package com.example.newsn.ui.home
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -29,17 +29,15 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.newsn.data.remote.dto.News
-import com.example.newsn.ui.HomeScreen.components.LoadingNewsListShimmer
+import com.example.newsn.ui.home.components.LoadingNewsListShimmer
 import com.example.newsn.ui.components.ScaffoldUse
 
 @ExperimentalCoilApi
 @Composable
 fun HomeScreen(news: State<List<News>>, navController: NavHostController) {
-    ScaffoldUse {
-        LazyColumn {
-            items(news.value) {
-                NewsCard(news = it)
-            }
+    LazyColumn {
+        items(news.value) {
+            NewsCard(news = it)
         }
     }
 }

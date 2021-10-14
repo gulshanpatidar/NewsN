@@ -1,4 +1,4 @@
-package com.example.newsn.ui.HomeScreen.components
+package com.example.newsn.ui.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,7 +10,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun ShimmerNewsCardItem(

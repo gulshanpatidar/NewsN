@@ -1,9 +1,8 @@
 package com.example.newsn.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,9 +17,19 @@ fun Drawer() {
             .background(Color.White)
             .fillMaxSize()
     ) {
-
-        repeat(5){ item ->
-            Text(text = "Item number $item",modifier = Modifier.padding(8.dp),color = Color.Black)
-        }
+        Spacer(modifier = Modifier.height(50.dp))
+        Text(text = "Top headlines")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Sports")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Entertainment")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Technology")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Business")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Education")
+        Divider(modifier = Modifier.height(8.dp))
+        Text(text = "Politics")
     }
 }

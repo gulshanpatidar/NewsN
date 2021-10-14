@@ -1,27 +1,48 @@
 package com.example.newsn.ui
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.example.newsn.data.remote.dto.News
-import com.example.newsn.ui.HomeScreen.HomeScreen
-import com.example.newsn.ui.HomeScreen.HomeViewModel
-import com.example.newsn.ui.HomeScreen.SplashScreen
+import coil.annotation.ExperimentalCoilApi
+import com.example.newsn.ui.home.HomeScreen
+import com.example.newsn.ui.home.HomeViewModel
+import com.example.newsn.ui.home.SplashScreen
+import com.example.newsn.ui.profile.ProfileScreen
+import com.example.newsn.ui.search.SearchScreen
+import com.example.newsn.ui.util.Routes
 
+@ExperimentalCoilApi
 @Composable
-fun AppNavigation(viewModel: HomeViewModel, navController: NavHostController) {
+fun AppNavigation(
+    viewModel: HomeViewModel,
+    navController: NavHostController,
+    innerPadding: PaddingValues
+) {
 
-    NavHost(navController = navController, startDestination = "main_screen"){
+    NavHost(
+        navController = navController,
+        startDestination = Routes.Home.route,
+        modifier = Modifier.padding(innerPadding)
+    ) {
         //splash screen
-        composable("splash_screen"){
+        composable(Routes.Splash.route) {
             SplashScreen(navController = navController)
         }
         //main screen
-        composable("main_screen"){
-            HomeScreen(news = viewModel.news,navController = navController)
+        composable(Routes.Home.route) {
+            HomeScreen(news = viewModel.news, navController = navController)
+        }
+
+        composable(Routes.Profile.route) {
+            ProfileScreen()
+        }
+
+        composable(Routes.Search.route) {
+            SearchScreen()
         }
     }
 }

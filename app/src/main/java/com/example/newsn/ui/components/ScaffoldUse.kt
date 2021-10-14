@@ -3,10 +3,13 @@ package com.example.newsn.ui.components
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.navigation.NavHostController
+import com.example.newsn.ui.AppNavigation
+import com.example.newsn.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ScaffoldUse(screen: @Composable () -> Unit) {
+fun ScaffoldUse(navController: NavHostController,viewModel: HomeViewModel) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(initialValue = DrawerValue.Closed))
 
     //use coroutine to open and close drawer
@@ -17,23 +20,17 @@ fun ScaffoldUse(screen: @Composable () -> Unit) {
         topBar = {
             TopBar( onMenuClicked = {
                 coroutineScope.launch {
-//                    if (scaffoldState.drawerState==DrawerState(DrawerValue.Closed)) {
-//                        scaffoldState.drawerState.open()
-//                    }else{
-//                        scaffoldState.drawerState.close()
-//                    }
                     scaffoldState.drawerState.open()
                 }
             } )
         },
         bottomBar = {
-            BottomBar()
-        },
-        content = {
-            screen()
+            BottomBar(navController = navController)
         },
         drawerContent = {
             Drawer()
         }
-    )
+    ){ innerPadding ->
+        AppNavigation(viewModel = viewModel, navController = navController,innerPadding)
+    }
 }

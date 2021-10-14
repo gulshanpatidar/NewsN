@@ -18,10 +18,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.example.newsn.ui.AppNavigation
-import com.example.newsn.ui.HomeScreen.HomeViewModel
+import com.example.newsn.ui.components.ScaffoldUse
+import com.example.newsn.ui.home.HomeViewModel
 import com.example.newsn.ui.theme.NewsNTheme
 
+@ExperimentalCoilApi
 class MainActivity : ComponentActivity() {
 
     private val viewModel: HomeViewModel by viewModels()
@@ -29,7 +32,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val news = viewModel.news
             NewsNTheme(darkTheme = false) {
                 val connectivityManager =
                     getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -40,12 +42,11 @@ class MainActivity : ComponentActivity() {
                     // A surface container using the 'background' color from the theme
                     Surface(color = MaterialTheme.colors.background) {
                         val navController = rememberNavController()
-                        AppNavigation(viewModel,navController)
+                        ScaffoldUse(navController = navController, viewModel = viewModel)
                     }
                 }else{
                     NetworkError()
                 }
-
             }
         }
     }
