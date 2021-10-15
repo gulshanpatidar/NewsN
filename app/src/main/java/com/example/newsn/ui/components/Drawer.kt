@@ -12,18 +12,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newsn.ui.screens.home.HomeViewModel
+import com.example.newsn.ui.util.Constants
 
 @Composable
-fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
+fun Drawer(viewModel: HomeViewModel, closeDrawer: () -> Unit) {
+
+    val categories = Constants.categories
 
     Column(
         modifier = Modifier
             .background(Color.White)
             .fillMaxSize()
     ) {
-        Box(modifier = Modifier
-            .background(MaterialTheme.colors.primary)
-            .fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colors.primary)
+                .fillMaxWidth()
+        ) {
             Spacer(modifier = Modifier.height(50.dp))
             Text(
                 text = "Categories",
@@ -36,96 +41,20 @@ fun Drawer(viewModel: HomeViewModel,closeDrawer: () -> Unit) {
             Spacer(modifier = Modifier.height(15.dp))
         }
         Divider(Modifier.height(1.dp))
-        Text(
-            text = "Top Headlines",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "general"
-                    viewModel.getNews(category = "general")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Sports",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "sports"
-                    viewModel.getNews(category = "sports")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Entertainment",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "entertainment"
-                    viewModel.getNews(category = "entertainment")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Technology",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "technology"
-                    viewModel.getNews(category = "technology")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Business",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "business"
-                    viewModel.getNews(category = "business")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Health",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "health"
-                    viewModel.getNews(category = "health")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(modifier = Modifier.height(1.dp))
-        Text(
-            text = "Science",
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    viewModel.category.value = "science"
-                    viewModel.getNews(category = "science")
-                    closeDrawer()
-                }
-                .padding(12.dp),
-            fontSize = 20.sp
-        )
-        Divider(Modifier.height(1.dp))
+        categories.forEach { category ->
+            Text(
+                text = category.categoryName,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        viewModel.category.value = category.categoryCode
+                        viewModel.getNews(category = category.categoryCode)
+                        closeDrawer()
+                    }
+                    .padding(12.dp),
+                fontSize = 20.sp
+            )
+            Divider(modifier = Modifier.height(1.dp))
+        }
     }
 }
