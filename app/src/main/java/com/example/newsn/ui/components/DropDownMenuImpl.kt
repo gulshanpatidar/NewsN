@@ -11,15 +11,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.newsn.ui.models.Country
 import com.example.newsn.ui.screens.home.HomeViewModel
 
 @Composable
 fun DropDownMenuImpl(viewModel: HomeViewModel) {
 
-    val countryList = listOf("in", "us")
+    val countryList = listOf(
+        Country("India","in"),
+        Country("USA","us"),
+        Country("Australia","au"),
+        Country("Canada","ca"),
+        Country("UK","gb"),
+    )
 
     var countryName: String by remember {
-        mutableStateOf(countryList[0])
+        mutableStateOf(countryList[0].countryName)
     }
 
     var expanded by remember {
@@ -36,11 +43,11 @@ fun DropDownMenuImpl(viewModel: HomeViewModel) {
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             countryList.forEach { country ->
                 DropdownMenuItem(onClick = {
-                    viewModel.getNews(country = country,category = viewModel.category.value)
+                    viewModel.getNews(country = country.countryCode, category = viewModel.category.value)
                     expanded = false
-                    countryName = country
+                    countryName = country.countryName
                 }) {
-                    val isSelected = country == countryName
+                    val isSelected = country.countryName == countryName
                     val style = if (isSelected) {
                         MaterialTheme.typography.body1.copy(
                             fontWeight = FontWeight.Bold,
@@ -52,7 +59,7 @@ fun DropDownMenuImpl(viewModel: HomeViewModel) {
                             color = MaterialTheme.colors.onSurface
                         )
                     }
-                    Text(text = country,style = style)
+                    Text(text = country.countryName, style = style)
                 }
             }
         }
