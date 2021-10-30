@@ -26,7 +26,7 @@ fun AppNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.route,
+        startDestination = Routes.Splash.route,
         modifier = Modifier.padding(innerPadding)
     ) {
         //splash screen
