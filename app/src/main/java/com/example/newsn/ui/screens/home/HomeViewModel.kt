@@ -10,10 +10,13 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {
     val news: MutableState<List<News>> = mutableStateOf(listOf())
-    val service = NewsService.create()
+    private val service = NewsService.create()
 
-    val country: MutableState<String> = mutableStateOf("in")
-    val category: MutableState<String> = mutableStateOf("general")
+    val searchQuery: MutableState<String> = mutableStateOf("")
+    val searchResponse: MutableState<List<News>> = mutableStateOf(ArrayList())
+
+    val category: MutableState<String> = mutableStateOf("")
+    val country: MutableState<String> = mutableStateOf("")
 
     init {
         getNews()
@@ -22,6 +25,12 @@ class HomeViewModel: ViewModel() {
     fun getNews(country: String = "in",category: String = ""){
         viewModelScope.launch {
             news.value = service.getTopHeadlines(country,category)
+        }
+    }
+
+    fun searchNews(query: String){
+        viewModelScope.launch {
+            searchResponse.value = service.getSpecificNews(query)
         }
     }
 }

@@ -12,6 +12,8 @@ interface NewsService {
 
     suspend fun getTopHeadlines(country: String,category: String): List<News>
 
+    suspend fun getSpecificNews(query: String): List<News>
+
     companion object{
         fun create(): NewsService{
             return NewsServiceImpl(

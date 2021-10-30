@@ -26,22 +26,46 @@ class NewsServiceImpl(
         } catch (e: RedirectResponseException) {
             // 3XX responses
             println("Error: ${e.response.status.description}")
-            null
+            return emptyList()
         } catch (e: ClientRequestException) {
             // 4XX responses
             println("Error: ${e.response.status.description}")
-            null
+            return emptyList()
         } catch (e: ServerResponseException) {
             // 5XX responses
             println("Error: ${e.response.status.description}")
-            null
+            return emptyList()
         } catch (e: Exception) {
             println("Error: ${e.message}")
-            null
+            return emptyList()
         }
-        if (newsResponse == null) {
-            return listOf()
+
+        return newsResponse.articles
+    }
+
+    override suspend fun getSpecificNews(query: String): List<News> {
+        val newsResponse = try {
+            client.get<NewsResponse>(HttpRoutes.TOP_HEADLINES){
+                parameter("q",query)
+                parameter("apiKey", HttpRoutes.API_KEY)
+            }
+        } catch (e: RedirectResponseException) {
+            // 3XX responses
+            println("Error: ${e.response.status.description}")
+            return emptyList()
+        } catch (e: ClientRequestException) {
+            // 4XX responses
+            println("Error: ${e.response.status.description}")
+            return emptyList()
+        } catch (e: ServerResponseException) {
+            // 5XX responses
+            println("Error: ${e.response.status.description}")
+            return emptyList()
+        } catch (e: Exception) {
+            println("Error: ${e.message}")
+            return emptyList()
         }
+
         return newsResponse.articles
     }
 }
