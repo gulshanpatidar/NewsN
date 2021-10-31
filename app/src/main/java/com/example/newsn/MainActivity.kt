@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     // A surface container using the 'background' color from the theme
                     Surface(color = MaterialTheme.colors.background) {
                         val navController = rememberNavController()
-                        ScaffoldUse(navController = navController, viewModel = viewModel)
+                        AppNavigation(viewModel = viewModel, navController = navController)
                     }
                 }else{
                     NetworkError()

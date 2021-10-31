@@ -19,27 +19,40 @@ import com.example.newsn.ui.screens.home.HomeViewModel
 
 //onMenuClicked is a triggering function
 @Composable
-fun TopBar(viewModel: HomeViewModel,onMenuClicked: () -> Unit) {
+fun TopBar(title: String,viewModel: HomeViewModel?, onMenuClicked: () -> Unit) {
 
-    TopAppBar(
-        title = {
-            Row {
-                Text(text = "NewsN", color = Color.White)
-                Spacer(modifier = Modifier.width(90.dp))
-                DropDownMenuImpl(viewModel)
-            }
-        },
-        navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.Menu,
-                contentDescription = "Menu",
-                //when click on menu, triggering function should call
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .clickable(onClick = onMenuClicked),
-                tint = Color.White
-            )
-        },
-        backgroundColor = MaterialTheme.colors.primary
-    )
+    if (viewModel != null) {
+        TopAppBar(
+            title = {
+                Row {
+                    Text(text = title, color = Color.White)
+                    Spacer(modifier = Modifier.width(90.dp))
+                    DropDownMenuImpl(viewModel)
+                }
+            },
+            navigationIcon = {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu",
+                    //when click on menu, triggering function should call
+                    modifier = Modifier
+                        .padding(start = 4.dp)
+                        .clickable(onClick = onMenuClicked),
+                    tint = Color.White
+                )
+            },
+            backgroundColor = MaterialTheme.colors.primary
+        )
+    }else{
+        TopAppBar(
+            title = {
+                Row {
+                    Text(text = title, color = Color.White)
+                    Spacer(modifier = Modifier.width(90.dp))
+                }
+            },
+            backgroundColor = MaterialTheme.colors.primary
+        )
+    }
+
 }

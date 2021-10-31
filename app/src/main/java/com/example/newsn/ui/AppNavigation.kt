@@ -20,14 +20,12 @@ import com.example.newsn.ui.util.Routes
 @Composable
 fun AppNavigation(
     viewModel: HomeViewModel,
-    navController: NavHostController,
-    innerPadding: PaddingValues
+    navController: NavHostController
 ) {
 
     NavHost(
         navController = navController,
-        startDestination = Routes.Splash.route,
-        modifier = Modifier.padding(innerPadding)
+        startDestination = Routes.Splash.route
     ) {
         //splash screen
         composable(Routes.Splash.route) {
@@ -35,19 +33,19 @@ fun AppNavigation(
         }
         //main screen
         composable(Routes.Home.route) {
-            HomeScreen(news = viewModel.news, navController = navController)
+            HomeScreen(viewModel, navController = navController)
         }
 
         composable(Routes.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(navController)
         }
 
         composable(Routes.Search.route) {
-            SearchScreen(viewModel)
+            SearchScreen(navController,viewModel)
         }
 
         composable(Routes.Saved.route){
-            SavedScreen()
+            SavedScreen(navController = navController)
         }
     }
 }

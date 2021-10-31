@@ -8,6 +8,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.newsn.ui.util.Constants
+import com.example.newsn.ui.util.Routes
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -29,7 +30,7 @@ fun BottomBar(navController: NavHostController) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations
                         // on the back stack as users select items
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Routes.Home.route) {
                             saveState = true
                         }
                         // Avoid multiple copies of the same destination when

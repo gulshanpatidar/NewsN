@@ -36,10 +36,13 @@ import com.example.newsn.ui.components.ScaffoldUse
 
 @ExperimentalCoilApi
 @Composable
-fun HomeScreen(news: State<List<News>>, navController: NavHostController) {
-    LazyColumn {
-        items(news.value) {
-            NewsCard(news = it)
+fun HomeScreen(viewModel: HomeViewModel, navController: NavHostController) {
+    val news = viewModel.news
+    ScaffoldUse(title = "NewsN",navController = navController, viewModel = viewModel) {
+        LazyColumn {
+            items(news.value) {
+                NewsCard(news = it)
+            }
         }
     }
 }

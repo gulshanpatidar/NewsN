@@ -33,7 +33,7 @@ fun DropDownMenuImpl(viewModel: HomeViewModel) {
         mutableStateOf(false)
     }
     Row(
-        Modifier.clickable {
+        Modifier.clickable(onClickLabel = "country") {
             expanded = !expanded
         }
     ) {

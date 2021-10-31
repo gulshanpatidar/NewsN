@@ -19,13 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
+import com.example.newsn.ui.components.ScaffoldUse
 import com.example.newsn.ui.screens.home.HomeViewModel
 import com.example.newsn.ui.screens.home.NewsCard
 
 @ExperimentalCoilApi
 @Composable
-fun SearchScreen(viewModel: HomeViewModel) {
+fun SearchScreen(navController: NavHostController,viewModel: HomeViewModel) {
     Box(modifier = Modifier.fillMaxSize()) {
 
         var query by remember {
@@ -36,17 +38,19 @@ fun SearchScreen(viewModel: HomeViewModel) {
             viewModel.searchResponse
         }
 
-        Column(modifier = Modifier.fillMaxSize()) {
-            SearchBar(query, onQueryFilled = {
-                viewModel.searchQuery.value = it
-                query = it
-            }) {
-                viewModel.searchNews(query = query)
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            LazyColumn{
-                items(news){
-                    NewsCard(news = it)
+        ScaffoldUse(title = "Search",navController = navController, viewModel = null) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                SearchBar(query, onQueryFilled = {
+                    viewModel.searchQuery.value = it
+                    query = it
+                }) {
+                    viewModel.searchNews(query = query)
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                LazyColumn{
+                    items(news){
+                        NewsCard(news = it)
+                    }
                 }
             }
         }
